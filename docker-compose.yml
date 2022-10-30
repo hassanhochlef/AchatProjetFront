@@ -4,13 +4,11 @@ services:
   image: 'mysql:8'
   networks:
    - customer-mysql
-  environment:
-      MYSQL_ROOT_PASSWORD: Welcome123
-      MYSQL_DATABASE: customer
   ports:
    - "3306:3306"
-  volumes:
-   - ./my-datavolume:/var/lib/mysql
+  environment:
+   - MYSQL_ROOT_PASSWORD=Welcome123
+   - MYSQL_DATABASE=customer
   healthcheck:
    test: ["CMD","mysqladmin","ping","-h","localhost"]
    timeout: 20s
@@ -27,7 +25,7 @@ services:
   depends_on:
    - "db"
  frontend:
-  image: 'hassanhochlef/frontend:latest'
+  image: 'hassanhochlef/projetachat:latest'
   links:
    - "backendserver"
   depends_on:
