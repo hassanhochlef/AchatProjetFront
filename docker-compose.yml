@@ -10,7 +10,7 @@ services:
   ports:
    - "3306:3306"
   volumes:
-   - db:/var/lib/mysql
+   - ./my-datavolume:/var/lib/mysql
   healthcheck:
    test: ["CMD","mysqladmin","ping","-h","localhost"]
    timeout: 20s
@@ -36,5 +36,3 @@ services:
    - "80:80"
 networks:
  customer-mysql:
-volumes:
-  db:
