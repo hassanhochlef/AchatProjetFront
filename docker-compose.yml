@@ -47,4 +47,4 @@ services:
 networks:
  customer-mysql:
 volumes:
-db:
+ db:
