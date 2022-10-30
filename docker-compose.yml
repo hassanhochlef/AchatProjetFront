@@ -22,10 +22,6 @@ services:
    - "8089"
   networks:
    - customer-mysql
-  volumes:
-      - .m2:/root/.m2
-  stdin_open: true
-  tty: true
   links:
    - "db"
   depends_on:
