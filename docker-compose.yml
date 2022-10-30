@@ -1,22 +1,16 @@
 version: '3'
 services:
- dbase:
+ db:
   image: 'mysql:8'
   networks:
    - customer-mysql
   environment:
       MYSQL_ROOT_PASSWORD: Welcome123
       MYSQL_DATABASE: customer
-      MYSQL_USER: root
-      MYSQL_PASSWORD: root
-      MYSQL_ROOT_HOST: '%'
   ports:
    - "3306:3306"
   volumes:
    - db:/var/lib/mysql
-  environment:
-   - MYSQL_ROOT_PASSWORD=Welcome123
-   - MYSQL_DATABASE=customer
   healthcheck:
    test: ["CMD","mysqladmin","ping","-h","localhost"]
    timeout: 20s
@@ -33,9 +27,9 @@ services:
   stdin_open: true
   tty: true
   links:
-   - "dbase"
+   - "db"
   depends_on:
-   - "dbase"
+   - "db"
  frontend:
   image: 'hassanhochlef/projetachat:latest'
   links:
@@ -46,5 +40,3 @@ services:
    - "80:80"
 networks:
  customer-mysql:
-volumes:
- db:
