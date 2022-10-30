@@ -40,3 +40,5 @@ services:
    - "80:80"
 networks:
  customer-mysql:
+volumes:
+  db:
