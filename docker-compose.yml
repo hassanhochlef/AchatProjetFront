@@ -1,11 +1,19 @@
 version: '3'
 services:
- db:
+ dbase:
   image: 'mysql:8'
   networks:
    - customer-mysql
+  environment:
+      MYSQL_ROOT_PASSWORD: Welcome123
+      MYSQL_DATABASE: customer
+      MYSQL_USER: root
+      MYSQL_PASSWORD: root
+      MYSQL_ROOT_HOST: '%'
   ports:
    - "3306:3306"
+  volumes:
+   - db:/var/lib/mysql
   environment:
    - MYSQL_ROOT_PASSWORD=Welcome123
    - MYSQL_DATABASE=customer
@@ -20,10 +28,14 @@ services:
    - "8089"
   networks:
    - customer-mysql
+  volumes:
+      - .m2:/root/.m2
+  stdin_open: true
+  tty: true
   links:
-   - "db"
+   - "dbase"
   depends_on:
-   - "db"
+   - "dbase"
  frontend:
   image: 'hassanhochlef/projetachat:latest'
   links:
@@ -34,3 +46,5 @@ services:
    - "80:80"
 networks:
  customer-mysql:
+volumes:
+db:
