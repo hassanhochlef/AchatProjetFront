@@ -27,7 +27,7 @@ services:
   depends_on:
    - "db"
  frontend:
-  image: 'hassanhochlef/projetachat:latest'
+  image: 'hassanhochlef/frontend:latest'
   links:
    - "backendserver"
   depends_on:
